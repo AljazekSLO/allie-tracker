@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
@@ -19,8 +20,7 @@ class VisitFactory extends Factory
     {
         return [
             'id' => fake()->uuid(),
-            'user_id' => User::factory(),
-            'country_id' => 1,
+            'country_id' => Country::factory(),
             'start_date' => fake()->date,
             'end_date' => fake()->date,
             'note' => fake()->paragraph,

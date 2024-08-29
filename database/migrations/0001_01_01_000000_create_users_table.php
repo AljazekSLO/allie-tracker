@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Country;
 
 return new class extends Migration
 {
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->foreignIdFor(Country::class)->nullable()->constrained()->onDelete('set null');
             $table->rememberToken();
             $table->timestamps();
         });

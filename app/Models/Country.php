@@ -12,4 +12,9 @@ class Country extends Model
     public function visits() {
         return $this->hasMany(Visit::class);
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

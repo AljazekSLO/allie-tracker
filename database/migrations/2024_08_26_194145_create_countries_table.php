@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('iso2');
             $table->string('population');
             $table->string('continent');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->float('rating')->default(0);
             $table->unsignedInteger('visits_count')->default(0);
             $table->timestamps();
