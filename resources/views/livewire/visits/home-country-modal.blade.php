@@ -1,12 +1,24 @@
 <div>
     <!-- Modal Background -->
-    <div x-data="{ open: @entangle('show') }" x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+    <div 
+        x-data="{ open: false }" 
+        x-cloak 
+        x-show="open" 
+        x-init="setTimeout(() => {if ($wire.show) {open = true}}, 1000)" 
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 scale-100"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-100"
+            
+        
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
         <!-- Modal Content -->
-        <div @click.away="open = false" class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
             <!-- Modal Header -->
             <div class="flex items-center justify-between border-b border-gray-200 pb-3 mb-4">
-                <h2 class="text-xl font-semibold text-gray-800">Country Selection</h2>
-                <button @click="open = false" class="text-gray-600 hover:text-gray-800 text-2xl">&times;</button>
+                <h2 class="text-xl font-semibold text-gray-800">Living Country Selection</h2>
             </div>
             <!-- Modal Body -->
             <div class="flex items-center space-x-4">
@@ -15,7 +27,7 @@
                 <!-- Country Info and Dropdown -->
                 <div>
                     <p class="text-gray-700 text-lg">You are detected in <span class="font-semibold">{{ $userGeolocation['country'] }}</span>.</p>
-                    <p class="text-gray-600 mt-2">Would you like to set this as your living country or select another one?</p>
+                    <p class="text-gray-600 mt-2">Set this as your living country or select another one</p>
 
                     <!-- Country Dropdown -->
                     <div class="mt-4">
@@ -32,8 +44,7 @@
             </div>
             <!-- Modal Footer -->
             <div class="mt-6 flex justify-end space-x-4">
-                <button wire:click="setCountry" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Save</button>
-                <button @click="open = false" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">Cancel</button>
+                <button wire:click="setCountry" @click="open = false" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Save</button>
             </div>
         </div>
     </div>

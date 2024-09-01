@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Visits;
 
 use App\Models\User;
 use Livewire\Component;
@@ -50,13 +50,11 @@ public function mount()
 
         if($country){
             $user->update(['country_id' => $country->id]);
-            $this->show = false;
-
         }
     }
 
     public function render()
     {
-        return view('livewire.home-country-modal');
+        return view('livewire.visits.home-country-modal');
     }
 }

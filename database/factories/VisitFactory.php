@@ -24,7 +24,7 @@ class VisitFactory extends Factory
             'start_date' => fake()->date,
             'end_date' => fake()->date,
             'note' => fake()->paragraph,
-            'rating' => fake()->numberBetween(1,10)
+            'rating' => fake()->numberBetween(1,5)
         ];
     }
 }

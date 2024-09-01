@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreignIdFor(Country::class)->nullable()->constrained()->onDelete('set null');
+            $table->foreignIdFor(country::class)->nullable()->constrained()->onDelete('set null');
             $table->rememberToken();
             $table->timestamps();
         });
