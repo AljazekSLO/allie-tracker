@@ -20,7 +20,7 @@ class VisitFactory extends Factory
     {
         return [
             'id' => fake()->uuid(),
-            'country_id' => Country::factory(),
+            'country_id' => Country::inRandomOrder()->first()->id,
             'start_date' => fake()->date,
             'end_date' => fake()->date,
             'note' => fake()->paragraph,

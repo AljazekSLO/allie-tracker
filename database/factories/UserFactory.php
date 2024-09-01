@@ -38,7 +38,7 @@ class UserFactory extends Factory
             'last_name' => 'Radovan',
             'email' => 'radovan.aljaz@gmail.com',
             'password' => '123',
-            'country_id' => Country::factory(),
+            'country_id' => Country::inRandomOrder()->first()->id,
             'remember_token' => Str::random(10),
         ];
     }

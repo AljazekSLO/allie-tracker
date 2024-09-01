@@ -16,6 +16,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $csvFilePath = storage_path('app/data/countries.csv'); // Adjust the path as needed
+        $csvData = [];
+
+        if (($handle = fopen($csvFilePath, 'r')) !== false) {
+            // Skip the header row if necessary
+            fgetcsv($handle);
+            
+            while (($row = fgetcsv($handle, 1000, ';')) !== false) {
+                $latitude = floatval(str_replace(",", ".", $row[4]));
+                $longitude = floatval(str_replace(",", ".", $row[5]));
+                
+                $csvData[] = [
+                    'name' => $row[0],
+                    'iso2' => $row[1],
+                    'population' => number_format(intval($row[2])),
+                    'continent' => $row[3],
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                    // Map other fields accordingly
+                ];
+            }
+            fclose($handle);
+        }
+
+        foreach($csvData as $data){
+            Country::create($data);
+        }
+
         $user = User::factory()->create();
 
         Visit::factory(50)

@@ -9,6 +9,8 @@ class Country extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function visits() {
         return $this->hasMany(Visit::class);
     }

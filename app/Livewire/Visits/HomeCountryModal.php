@@ -51,6 +51,9 @@ public function mount()
         if($country){
             $user->update(['country_id' => $country->id]);
         }
+
+        $this->dispatch('refreshComponent');
+
     }
 
     public function render()

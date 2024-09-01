@@ -14,23 +14,27 @@ class RecentlyVisited extends Component
 
     public $showAll = false;
 
+    protected $listeners = ['refreshComponent' => '$refresh'];
+
 
     public function render()
     {
-        // Get the current user's country ID
-        $userCountryId = auth()->user()->country()->first()->id;
+        $userCountry= auth()->user()->country()->first();
 
-        // Retrieve visits to countries other than the user's own, ordered by end date
-        $query = auth()->user()
-        ->visits()
-        ->where('country_id', '!=', $userCountryId)
-        ->orderBy('end_date', 'desc');
-
-        $visits = $this->showAll ? $query->get() : $query->simplePaginate(3);
+        if($userCountry){
+            $query = auth()->user()
+            ->visits()
+            ->where('country_id', '!=', $userCountry->id)
+            ->orderBy('end_date', 'desc');
+            
+            $visits = $this->showAll ? $query->get() : $query->simplePaginate(3);
+        }
         
+
         return view('livewire.visits.recently-visited', [
-            'visits' => $visits
+            'visits' => $visits ?? null
         ]);
+        
     }
 
     public function viewAll(){
