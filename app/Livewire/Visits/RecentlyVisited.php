@@ -12,6 +12,8 @@ class RecentlyVisited extends Component
 
     use WithPagination, WithoutUrlPagination;
 
+    public $showAll = false;
+
 
     public function render()
     {
@@ -19,14 +21,20 @@ class RecentlyVisited extends Component
         $userCountryId = auth()->user()->country()->first()->id;
 
         // Retrieve visits to countries other than the user's own, ordered by end date
-        $visits = auth()->user()
-            ->visits()
-            ->where('country_id', '!=', $userCountryId)
-            ->orderBy('end_date', 'desc')
-            ->simplePaginate(3);
+        $query = auth()->user()
+        ->visits()
+        ->where('country_id', '!=', $userCountryId)
+        ->orderBy('end_date', 'desc');
 
+        $visits = $this->showAll ? $query->get() : $query->simplePaginate(3);
+        
         return view('livewire.visits.recently-visited', [
             'visits' => $visits
         ]);
+    }
+
+    public function viewAll(){
+        $this->showAll = !$this->showAll;
+
     }
 }

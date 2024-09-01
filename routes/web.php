@@ -13,7 +13,8 @@ Route::get('/', function() {
     return redirect()->route('visits');
 })->name('dashboard');
 
-Route::get('/visits', [VisitController::class, 'index'])
+
+Route::get('/visited', [VisitController::class, 'index'])
     ->middleware(['auth'])
     ->name('visits');
 
